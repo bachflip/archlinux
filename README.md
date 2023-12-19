@@ -1,4 +1,11 @@
+# Tricks
+```
+# Suspend (must be outside of arch-chroot)
+echo mem | tee /sys/power/state
+```
+
 # Installation
+
 
 ```
 # open another console
