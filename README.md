@@ -28,6 +28,50 @@ ping archlinux.org
 # update timezone
 timedatectl set-timezone <Tab>
 
+# disk partition
+fdisk /dev/nvme1n1 # 1Tb disk
+# partition 1: 1Gb
+# partition 2: 1Gb
+# partition 3: remaining
 
+# format
+mkfs.ext4 /dev/nvme1n1p3
+mkswap /dev/nvme1n1p2
+mkfs.fat -F 32 /dev/nvme1n1p1
+
+# mount
+mount /dev/nvme1n1p3 /mnt
+mount /dev/nvme1n1p1 /mnt/boot
+swapon /dev/nvme1n1p2
+
+# install packages
+pacman-key --init # init keyring
+pacstrap -K /mnt base linux linux-firmware
+
+# configure filesystem
+genfstab -U /mnt >> /mnt/etc/fstab
+
+# change root
+arch-chroot /mnt
+pacman -S --noconfirm vim
+
+# time
+ls -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+hwclock -systohc
+
+# localization
+sed -i '/en_US.UTF-8 UTF-8/s/^#//g' /etc/locale.gen
+locale-gen
+echo 'LANG=en_US.UTF-8' > /etc/locale.conf
+
+# hostname
+echo 'p1' > /etc/hostname
+
+# root password
+passwd
+
+# bootloader (must be inside arch-chroot)
+pacman -S --noconfirm grub efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 
 ```
