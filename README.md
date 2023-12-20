@@ -125,5 +125,7 @@ yay -S --noconfirm polybar
 # neovim
 yay -S --noconfirm neovim cmake fzf ripgrep fd tmux nodejs npm lazygit
 
+# others
+yay -S --noconfirm openssh
 
 ```
