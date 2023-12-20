@@ -60,7 +60,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 # change root
 arch-chroot /mnt
-pacman -S --noconfirm vim
+pacman -S --noconfirm vim networkmanager
 
 # time
 ls -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
@@ -80,5 +80,50 @@ passwd
 # bootloader (must be inside arch-chroot)
 pacman -S --noconfirm grub efibootmgr
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+grub-mkconfig -o /boot/grub/grub.cfg
+
+# reboot
+<Ctrl-d>
+reboot
+
+```
+
+# Inside Archlinux
+```
+# internet
+systemctl start NetworkManager
+systemctl enable NetworkManager
+nmcli device wifi connect <SSID> password <password>
+
+# pacman update
+pacman -Syyu
+
+# X
+pacman -S --noconfirm xorg-server xorg-xinit
+
+# add user
+useradd -m bach
+passwd bach
+
+# AUR helper (run with user bach)
+pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si
+
+# display manager
+yay -S --noconfirm ly
+systemctl enable ly.service
+
+# zsh
+yay -S zsh
+chsh -s /usr/bin/zsh
+
+# polybar
+yay -S --noconfirm polybar
+
+# neovim
+yay -S --noconfirm neovim cmake fzf ripgrep fd tmux nodejs npm lazygit
+
 
 ```
