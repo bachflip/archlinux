@@ -2,6 +2,32 @@
 ```
 # Suspend (must be outside of arch-chroot)
 echo mem | tee /sys/power/state
+
+# Keymaps ThinkPad P1
+xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
+
+F1 - 121 XF86AudioMute
+F2 - 122 XF86AudioLowerVolume
+F3 - 123 XF86AudioRaiseVolume
+F4 - 198 XF86AudioMicMute
+F5 - 232 XF86MonBrightnessDown
+F6 - 233 XF86MonBrightnessUp
+F7 - 235 XF86Display
+F8 - 246 WF86WLAN
+F9 - 224 XF86Messenger
+F10 - 226 XF86Go
+F11 - 231 Cancel
+F12 - 164 XF86Favorites
+
+Fn - XF86WakeUp
+
+# Scancode ThinkPad P1
+sudo evtest
+F1 - 113 KEY_MUTE
+F2 - 114 KEY_VOLUMEDOWN
+F3 - 115 KEY_VOLUMEUP
+
+
 ```
 
 # Installation
@@ -123,9 +149,26 @@ chsh -s /usr/bin/zsh
 yay -S --noconfirm polybar
 
 # neovim
-yay -S --noconfirm neovim cmake fzf ripgrep fd tmux nodejs npm lazygit
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+yay -S --noconfirm neovim cmake ripgrep fd tmux nodejs npm lazygit
+
 
 # others
 yay -S --noconfirm openssh
+
+# sound
+yay -S --noconfirm alsa-utils
+systemctl start alsa-restore.service
+systemctl start alsa-state.service
+
+# xremap
+yay -S --noconfirm xremap-x11-bin
+sudo gpasswd -a $USER input
+echo 'KERNEL=="uinput", GROUP="input", TAG+="uaccess"' | sudo tee /etc/udev/rules.d/99-input.rules
+
+# brightness
+sudo gpasswd -a $USER video
+echo 'ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chgrp video $sys$devpath/brightness", RUN+="/bin/chmod g+w $sys$devpath/brightness"' > /etc/udev/rules.d/backlight.rules
 
 ```
