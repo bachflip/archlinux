@@ -90,7 +90,7 @@ pacman -S --noconfirm vim networkmanager
 
 # time
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
-hwclock -systohc
+hwclock --systohc
 
 # localization
 sed -i '/en_US.UTF-8 UTF-8/s/^#//g' /etc/locale.gen
