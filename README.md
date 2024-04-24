@@ -151,6 +151,15 @@ makepkg -si
 yay -S --noconfirm ly
 systemctl enable ly.service
 
+# i3
+yay -S --noconfirm i3
+
+# fonts
+yay -S --noconfirm wget
+mkdir ~/.local/share/fonts
+cd ~/.local/share/fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip && rm JetBrainsMono.zip
+
 # zsh
 yay -S zsh
 chsh -s /usr/bin/zsh
@@ -161,7 +170,7 @@ yay -S --noconfirm polybar
 # neovim
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
-yay -S --noconfirm neovim cmake ripgrep fd tmux nodejs npm lazygit
+yay -S --noconfirm neovim cmake ripgrep fd tmux nodejs npm lazygit bat starship exa fastfetch
 
 
 # others
