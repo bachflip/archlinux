@@ -74,7 +74,7 @@ mkfs.fat -F 32 /dev/nvme1n1p1
 
 # mount
 mount /dev/nvme1n1p3 /mnt
-mount /dev/nvme1n1p1 /mnt/boot
+mount --mkdir /dev/nvme1n1p1 /mnt/boot
 swapon /dev/nvme1n1p2
 
 # install packages
