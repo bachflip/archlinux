@@ -89,7 +89,7 @@ arch-chroot /mnt
 pacman -S --noconfirm vim networkmanager
 
 # time
-ls -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 hwclock -systohc
 
 # localization
