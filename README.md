@@ -135,6 +135,12 @@ pacman -S --noconfirm xorg-server xorg-xinit
 useradd -m bach
 passwd bach
 
+# add user to sudo
+pacman -S --noconfirm sudo
+EDITOR=vim visudo
+# uncomment: %wheel ALL=(ALL:ALL) ALL
+usermod -a -G wheel bach
+
 # AUR helper (run with user bach)
 pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay-bin.git
