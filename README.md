@@ -129,7 +129,7 @@ nmcli device wifi connect <SSID> password <password>
 pacman -Syyu
 
 # X
-pacman -S --noconfirm xorg-server xorg-xinit
+pacman -S --noconfirm xorg-server xorg-xinit xf86-video-intel nvidia xorg-xrandr arandr
 
 # add user
 useradd -m bach
