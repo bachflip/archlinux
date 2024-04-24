@@ -108,6 +108,10 @@ pacman -S --noconfirm grub efibootmgr
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 
+# delete other boot entries
+efibootmgr
+efibootmgr -B -b BOOT_NUMBER
+
 # reboot
 <Ctrl-d>
 reboot
