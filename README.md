@@ -177,9 +177,13 @@ yay -S --noconfirm neovim cmake ripgrep fd tmux nodejs npm lazygit bat starship 
 yay -S --noconfirm openssh
 
 # sound
-yay -S --noconfirm alsa-utils
-systemctl start alsa-restore.service
-systemctl start alsa-state.service
+yay -S --noconfirm alsa-utils sof-firmware myxer pulseaudio
+<!-- systemctl start alsa-restore.service -->
+<!-- systemctl start alsa-state.service -->
+
+# volume popup
+yay -S --noconfirm libnotify dunst i3-volume
+# TODO: then do copy the i3-volume config
 
 # xremap
 yay -S --noconfirm xremap-x11-bin
