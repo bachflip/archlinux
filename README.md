@@ -131,6 +131,9 @@ pacman -Syyu
 # X
 pacman -S --noconfirm xorg-server xorg-xinit xf86-video-intel nvidia xorg-xrandr arandr
 
+# monitor setup
+yay -S --noconfirm autorandr srandrd
+
 # add user
 useradd -m bach
 passwd bach
